@@ -11,6 +11,7 @@ namespace ConsoleAppDI
     {
         static void Main(string[] args)
         {
+            #region DI setup
             Console.WriteLine("Set up DI");
             HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
             builder.Services.AddScoped<IDateTimeService, DateTimeService>();
@@ -26,9 +27,17 @@ namespace ConsoleAppDI
             using IHost host = builder.Build();
             Console.WriteLine("DI setup done");
 
+            #endregion
+
+            #region logic
+
             //get the time
             DoDateTimeThing(host.Services);
+
+            #endregion
         }
+
+
 
         static async void DoDateTimeThing(IServiceProvider serviceProvider)
         {
